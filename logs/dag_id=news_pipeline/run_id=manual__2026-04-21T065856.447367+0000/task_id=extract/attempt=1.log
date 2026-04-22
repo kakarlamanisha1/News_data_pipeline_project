@@ -1,0 +1,22 @@
+[2026-04-21T06:58:58.904+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-21T06:58:59.099+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: news_pipeline.extract manual__2026-04-21T06:58:56.447367+00:00 [queued]>
+[2026-04-21T06:58:59.135+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: news_pipeline.extract manual__2026-04-21T06:58:56.447367+00:00 [queued]>
+[2026-04-21T06:58:59.137+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2026-04-21T06:58:59.193+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): extract> on 2026-04-21 06:58:56.447367+00:00
+[2026-04-21T06:58:59.214+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'news_pipeline', 'extract', 'manual__2026-04-21T06:58:56.447367+00:00', '--job-id', '13', '--raw', '--subdir', 'DAGS_FOLDER/news_pipeline.py', '--cfg-path', '/tmp/tmp6ojdoh54']
+[2026-04-21T06:58:59.222+0000] {standard_task_runner.py:91} INFO - Job 13: Subtask extract
+[2026-04-21T06:58:59.226+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=187) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-21T06:58:59.229+0000] {standard_task_runner.py:63} INFO - Started process 188 to run task
+[2026-04-21T06:58:59.510+0000] {task_command.py:426} INFO - Running <TaskInstance: news_pipeline.extract manual__2026-04-21T06:58:56.447367+00:00 [running]> on host 6fe59ef72561
+[2026-04-21T06:58:59.926+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='news_pipeline' AIRFLOW_CTX_TASK_ID='extract' AIRFLOW_CTX_EXECUTION_DATE='2026-04-21T06:58:56.447367+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-21T06:58:56.447367+00:00'
+[2026-04-21T06:58:59.928+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-21T06:59:00.010+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2026-04-21T06:59:00.014+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python /opt/***/scripts/extract_news.py']
+[2026-04-21T06:59:00.036+0000] {subprocess.py:86} INFO - Output:
+[2026-04-21T06:59:01.820+0000] {subprocess.py:93} INFO - News extracted successfully
+[2026-04-21T06:59:01.867+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2026-04-21T06:59:01.869+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-21T06:59:01.911+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=news_pipeline, task_id=extract, run_id=manual__2026-04-21T06:58:56.447367+00:00, execution_date=20260421T065856, start_date=20260421T065859, end_date=20260421T065901
+[2026-04-21T06:59:01.981+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-04-21T06:59:02.015+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-04-21T06:59:02.022+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

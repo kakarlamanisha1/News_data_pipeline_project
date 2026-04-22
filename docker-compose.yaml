@@ -1,0 +1,80 @@
+x-airflow-common: &airflow-common
+  image: apache/airflow:2.9.1
+  environment:
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+
+    # Security / encryption
+    AIRFLOW__CORE__FERNET_KEY: "YOUR_FERNET_KEY_HERE"
+    AIRFLOW__WEBSERVER__SECRET_KEY: "my_super_secret_key_123"
+
+    # Database
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+
+    # Timezone
+    AIRFLOW__CORE__DEFAULT_TIMEZONE: Asia/Kolkata
+
+    # Auto create admin user
+    _AIRFLOW_WWW_USER_USERNAME: admin
+    _AIRFLOW_WWW_USER_PASSWORD: admin
+    _AIRFLOW_WWW_USER_FIRSTNAME: Admin
+    _AIRFLOW_WWW_USER_LASTNAME: User
+    _AIRFLOW_WWW_USER_EMAIL: admin@gmail.com
+
+    # Python packages auto install
+    _PIP_ADDITIONAL_REQUIREMENTS: >
+      requests
+      pandas
+      boto3
+      snowflake-connector-python
+      python-dotenv
+
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./logs:/opt/airflow/logs
+    - ./plugins:/opt/airflow/plugins
+    - ./scripts:/opt/airflow/scripts
+    - ./config:/opt/airflow/config
+
+  depends_on:
+    - postgres
+
+services:
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+
+  airflow-init:
+    <<: *airflow-common
+    command: >
+      bash -c "
+      airflow db migrate &&
+      airflow users create
+      --username admin
+      --password admin
+      --firstname Admin
+      --lastname User
+      --role Admin
+      --email admin@gmail.com || true
+      "
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    restart: always
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    restart: always
+
+volumes:
+  postgres-db-volume:

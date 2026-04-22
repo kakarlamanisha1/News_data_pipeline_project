@@ -1,0 +1,6 @@
+apache-airflow
+pandas
+requests
+boto3
+python-dotenv
+snowflake-connector-python
