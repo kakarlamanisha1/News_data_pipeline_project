@@ -2,24 +2,6 @@
 
 A complete ETL (Extract, Transform, Load) data pipeline for collecting news articles from NewsAPI, processing them, and storing in AWS S3 and Snowflake using Apache Airflow orchestration.
 
-## 📋 Table of Contents
-
-1. [Project Overview](#project-overview)
-2. [Features](#features)
-3. [Architecture](#architecture)
-4. [Project Structure](#project-structure)
-5. [Prerequisites](#prerequisites)
-6. [Installation & Setup](#installation--setup)
-7. [Configuration](#configuration)
-8. [Running the Pipeline](#running-the-pipeline)
-9. [Docker Commands](#docker-commands)
-10. [Airflow UI](#airflow-ui)
-11. [Pipeline Details](#pipeline-details)
-12. [Troubleshooting](#troubleshooting)
-13. [Contributing](#contributing)
-14. [License](#license)
-
----
 
 ## 🎯 Project Overview
 
